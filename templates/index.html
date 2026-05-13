@@ -586,7 +586,7 @@
       <div class="anim" style="background:var(--bg2);border:1px solid var(--c1-10);border-radius:var(--r-lg);padding:1.5rem">
         <div class="flex items-center justify-between mb-4">
           <h3 class="font-bold text-lg flex items-center gap-2"><i data-lucide="monitor" class="ic ic-md"></i> 人工客服工作台</h3>
-          <a href="/agent" target="_blank" class="px-3 py-1.5 rounded-lg text-xs border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all flex items-center gap-1"><i data-lucide="external-link" class="ic ic-xs"></i> 打开工作台</a>
+          <a href="/agent" target="_blank" rel="noopener" onclick="window.open('/agent','_blank');return false;" class="px-3 py-1.5 rounded-lg text-xs border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all flex items-center gap-1"><i data-lucide="external-link" class="ic ic-xs"></i> 打开工作台</a>
         </div>
         <div class="rounded-lg overflow-hidden border border-white/5" style="background:var(--bg0)">
           <div style="background:var(--bg2);padding:0.5rem 0.75rem;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:0.5rem">
@@ -619,7 +619,7 @@
       <p class="text-slate-400 text-sm mb-3 flex items-center justify-center gap-1.5"><i data-lucide="lightbulb" class="ic ic-sm" style="color:var(--c5)"></i> <strong>体验方式</strong>：在聊天框中输入「转人工」，AI 会先了解您的问题并尝试用知识库解决；确实无法解决时才会转接人工客服</p>
       <div class="flex flex-wrap justify-center gap-3">
         <button onclick="openChatAndTransfer()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:opacity-90 transition-all flex items-center gap-1.5"><i data-lucide="message-circle" class="ic ic-sm"></i> 体验转人工</button>
-        <a href="/agent" target="_blank" class="px-6 py-2.5 rounded-xl border border-cyan-500/30 text-cyan-400 font-medium hover:bg-cyan-500/10 transition-all flex items-center gap-1.5"><i data-lucide="monitor" class="ic ic-sm"></i> 打开客服工作台</a>
+        <a href="/agent" target="_blank" rel="noopener" onclick="window.open('/agent','_blank');return false;" class="px-6 py-2.5 rounded-xl border border-cyan-500/30 text-cyan-400 font-medium hover:bg-cyan-500/10 transition-all flex items-center gap-1.5"><i data-lucide="monitor" class="ic ic-sm"></i> 打开客服工作台</a>
       </div>
     </div>
   </div>
