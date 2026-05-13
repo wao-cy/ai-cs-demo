@@ -1,0 +1,113 @@
+/* ============ CSS 变量系统 ============ */
+:root {
+  /* 背景色梯度 */
+  --bg0: #070b14;
+  --bg1: #0d1321;
+  --bg2: #111827;
+
+  /* 强调色 */
+  --c1: #06b6d4;
+  --c2: #3b82f6;
+  --c3: #10b981;
+  --c4: #8b5cf6;
+  --c5: #f59e0b;
+  --c6: #ef4444;
+
+  /* 文字色 */
+  --t1: #f1f5f9;
+  --t2: #94a3b8;
+  --t3: #64748b;
+
+  /* 半透明派生色 */
+  --c1-10: rgba(6, 182, 212, 0.1);
+  --c1-15: rgba(6, 182, 212, 0.15);
+  --c1-20: rgba(6, 182, 212, 0.2);
+  --c1-30: rgba(6, 182, 212, 0.3);
+  --c1-50: rgba(6, 182, 212, 0.5);
+  --c2-15: rgba(59, 130, 246, 0.15);
+  --c2-20: rgba(59, 130, 246, 0.2);
+  --c3-15: rgba(16, 185, 129, 0.15);
+  --c3-20: rgba(16, 185, 129, 0.2);
+  --c4-15: rgba(139, 92, 246, 0.15);
+  --c4-20: rgba(139, 92, 246, 0.2);
+  --c5-15: rgba(245, 158, 11, 0.15);
+  --c5-05: rgba(245, 158, 11, 0.05);
+  --c6-10: rgba(239, 68, 68, 0.1);
+  --c6-15: rgba(239, 68, 68, 0.15);
+
+  /* 阴影 */
+  --glow: 0 0 20px rgba(6, 182, 212, 0.3);
+  --glow-sm: 0 0 12px rgba(6, 182, 212, 0.15);
+
+  /* 间距 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+
+  /* 圆角 */
+  --r-sm: 0.5rem;
+  --r-md: 0.75rem;
+  --r-lg: 1rem;
+  --r-xl: 1.5rem;
+  --r-full: 9999px;
+}
+
+/* ============ 重置 ============ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg0);
+  color: var(--t1);
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+
+/* ============ 滚动条 ============ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* ============ Lucide 图标辅助类 ============ */
+.ic { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; }
+.ic svg { stroke-width: 1.5; }
+.ic-xs svg { width: 14px; height: 14px; }
+.ic-sm svg { width: 16px; height: 16px; }
+.ic-md svg { width: 20px; height: 20px; }
+.ic-lg svg { width: 24px; height: 24px; }
+.ic-xl svg { width: 32px; height: 32px; }
+.ic-2xl svg { width: 48px; height: 48px; }
+
+/* ============ 动画关键帧 ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(6,182,212,0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============ 滚动入场动画 ============ */
+.anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.anim.vis {
+  opacity: 1;
+  transform: translateY(0);
+}

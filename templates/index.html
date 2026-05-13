@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盼之代售 AI 智能客服系统 | 知识库运营方案</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/base.css">
+<link rel="stylesheet" href="/static/css/components.css">
+<link rel="stylesheet" href="/static/css/pages.css">
+</head>
+<body>
+
+<!-- 导航栏 -->
+<nav class="navbar" id="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <div class="flex items-center gap-2 flex-shrink-0">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">盼</div>
+      <span class="font-bold text-lg">AI 智能客服</span>
+    </div>
+    <div class="hidden md:flex items-center gap-1">
+      <a href="#hero" class="nav-link active">首页</a>
+      <a href="#workflow" class="nav-link">运行流程</a>
+      <a href="#knowledge" class="nav-link">知识库</a>
+      <a href="#dashboard" class="nav-link">数据看板</a>
+      <a href="#scenarios" class="nav-link">场景案例</a>
+      <a href="#order-sim" class="nav-link">订单模拟</a>
+      <a href="#human-agent" class="nav-link">人工接管</a>
+    </div>
+    <button onclick="toggleChat()" class="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium hover:opacity-90 flex items-center gap-1.5 flex-shrink-0"><i data-lucide="message-circle" class="ic ic-sm"></i> 体验客服</button>
+  </div>
+  <!-- 移动端导航链接 -->
+  <div class="md:hidden overflow-x-auto px-4 pb-2 flex gap-1 scrollbar-hide">
+    <a href="#hero" class="nav-link-mobile active">首页</a>
+    <a href="#workflow" class="nav-link-mobile">运行流程</a>
+    <a href="#knowledge" class="nav-link-mobile">知识库</a>
+    <a href="#dashboard" class="nav-link-mobile">数据看板</a>
+    <a href="#scenarios" class="nav-link-mobile">场景案例</a>
+    <a href="#order-sim" class="nav-link-mobile">订单模拟</a>
+    <a href="#human-agent" class="nav-link-mobile">人工接管</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+    <div class="hero-badge mb-6 anim">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+      知识库运营 · AI Agent · 智能客服
+    </div>
+    <h1 class="hero-title mb-6 anim">
+      <span class="gradient-text">AI 智能客服系统</span><br>
+      <span style="font-weight:300;font-size:0.55em;color:var(--t2)">盼之代售 · 知识库运营解决方案</span>
+    </h1>
+    <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 anim" style="line-height:1.8">
+      基于 <strong class="text-cyan-400">RAG 检索增强</strong> + <strong class="text-blue-400">大语言模型</strong>，构建游戏账号交易平台智能客服体系。<br>
+      覆盖交易流程、验号换绑、包赔售后等 <strong class="text-green-400">9 大知识分类</strong>，实现意图识别、多轮引导、情绪感知。
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 mb-12 anim">
+      <button onclick="toggleChat()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium text-lg hover:opacity-90 transition-all hover:scale-105 flex items-center gap-2" style="animation:pulseGlow 2s infinite"><i data-lucide="message-circle" class="ic ic-md"></i> 立即体验 AI 客服</button>
+      <a href="#workflow" class="px-8 py-3 rounded-xl border border-cyan-500/30 text-cyan-400 font-medium text-lg hover:bg-cyan-500/10 transition-all flex items-center gap-2"><i data-lucide="search" class="ic ic-md"></i> 了解运行流程</a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto anim">
+      <div class="stat-card"><div class="stat-number gradient-text">9</div><div class="text-sm text-slate-400 mt-1">知识分类</div></div>
+      <div class="stat-card"><div class="stat-number" style="color:var(--c2)">50+</div><div class="text-sm text-slate-400 mt-1">知识条目</div></div>
+      <div class="stat-card"><div class="stat-number" style="color:var(--c3)">87%</div><div class="text-sm text-slate-400 mt-1">自动解决率</div></div>
+      <div class="stat-card"><div class="stat-number" style="color:var(--c4)">2.3s</div><div class="text-sm text-slate-400 mt-1">平均响应</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 运行流程 -->
+<section class="section" id="workflow" style="background:var(--bg1)">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="anim"><div class="section-divider"></div><h2 class="section-title">AI 客服运行流程</h2><p class="section-subtitle">从用户输入到智能回复的完整 RAG 链路</p></div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div class="flow-step anim">
+        <div class="flow-icon" style="background:var(--c1-15);color:var(--c1)"><i data-lucide="user" class="ic ic-lg"></i></div>
+        <h3 class="font-bold mb-1">1. 用户输入</h3>
+        <p class="text-sm text-slate-400 mb-3">用户发起咨询，支持文字提问和快捷问题</p>
+        <div class="text-xs text-slate-500 pt-3 border-t border-white/5">示例：「账号被找回怎么办」「QQ换绑流程」</div>
+      </div>
+      <div class="flow-step anim">
+        <div class="flow-icon" style="background:var(--c2-15);color:var(--c2)"><i data-lucide="brain" class="ic ic-lg"></i></div>
+        <h3 class="font-bold mb-1">2. 意图识别</h3>
+        <p class="text-sm text-slate-400 mb-3">NLU 语义理解，识别用户身份和问题类别</p>
+        <div class="text-xs text-slate-500 pt-3 border-t border-white/5">识别维度：买家/卖家 | 问题分类 | 情绪状态</div>
+      </div>
+      <div class="flow-step anim">
+        <div class="flow-icon" style="background:var(--c3-15);color:var(--c3)"><i data-lucide="book-open" class="ic ic-lg"></i></div>
+        <h3 class="font-bold mb-1">3. 混合检索</h3>
+        <p class="text-sm text-slate-400 mb-3">BM25 关键词 + 向量语义双路召回，加权融合排序</p>
+        <div class="text-xs text-slate-500 pt-3 border-t border-white/5">策略：BM25 + Embedding → 融合排序 → Top-K → Prompt 注入</div>
+      </div>
+      <div class="flow-step anim">
+        <div class="flow-icon" style="background:var(--c4-15);color:var(--c4)"><i data-lucide="scale" class="ic ic-lg"></i></div>
+        <h3 class="font-bold mb-1">4. 智能生成</h3>
+        <p class="text-sm text-slate-400 mb-3">LLM 基于上下文生成回复，自主决定是否调用工具</p>
+        <div class="text-xs text-slate-500 pt-3 border-t border-white/5">直接回复 | 调用订单查询 | 引导后转人工</div>
+      </div>
+    </div>
+
+    <!-- 分支展示 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 anim">
+      <div class="rounded-xl p-5 border" style="background:rgba(16,185,129,0.05);border-color:var(--c3-20)">
+        <div class="flex items-center gap-2 mb-2"><i data-lucide="check-circle-2" class="ic ic-md" style="color:var(--c3)"></i><span class="font-bold text-green-400">知识库直接回复</span></div>
+        <p class="text-sm text-slate-400">混合检索命中相关内容，AI 基于上下文生成回复，附带知识来源标注。</p>
+      </div>
+      <div class="rounded-xl p-5 border" style="background:var(--c5-05);border-color:rgba(245,158,11,0.2)">
+        <div class="flex items-center gap-2 mb-2"><i data-lucide="database" class="ic ic-md" style="color:var(--c5)"></i><span class="font-bold text-amber-400">Function Calling</span></div>
+        <p class="text-sm text-slate-400">涉及订单查询时，AI 自动调用 query_order 工具，查询数据库后生成带订单卡片的回复。</p>
+      </div>
+      <div class="rounded-xl p-5 border" style="background:var(--c6-10);border-color:rgba(239,68,68,0.2)">
+        <div class="flex items-center gap-2 mb-2"><i data-lucide="headphones" class="ic ic-md" style="color:var(--c6)"></i><span class="font-bold text-red-400">转人工客服</span></div>
+        <p class="text-sm text-slate-400">AI 引导无果后调用 transfer_to_human，生成上下文摘要，无缝衔接人工客服工作台。</p>
+      </div>
+    </div>
+
+    <!-- RAG 流程图 -->
+    <div class="mt-12 anim">
+      <div class="chart-container">
+        <h3 class="font-bold text-lg mb-4 text-center">RAG 检索增强生成流程</h3>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-3 text-sm flex-wrap">
+          <div class="px-4 py-3 rounded-lg border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 font-medium flex items-center gap-1.5"><i data-lucide="user" class="ic ic-sm"></i> 用户问题</div>
+          <span class="text-cyan-400/50 text-xl hidden md:inline">→</span>
+          <div class="px-4 py-3 rounded-lg border border-blue-500/30 bg-blue-500/5 text-blue-400 font-medium flex items-center gap-1.5"><i data-lucide="search" class="ic ic-sm"></i> BM25 + 向量语义</div>
+          <span class="text-cyan-400/50 text-xl hidden md:inline">→</span>
+          <div class="px-4 py-3 rounded-lg border border-green-500/30 bg-green-500/5 text-green-400 font-medium flex items-center gap-1.5"><i data-lucide="git-merge" class="ic ic-sm"></i> 融合排序</div>
+          <span class="text-cyan-400/50 text-xl hidden md:inline">→</span>
+          <div class="px-4 py-3 rounded-lg border border-purple-500/30 bg-purple-500/5 text-purple-400 font-medium flex items-center gap-1.5"><i data-lucide="puzzle" class="ic ic-sm"></i> 上下文注入</div>
+          <span class="text-cyan-400/50 text-xl hidden md:inline">→</span>
+          <div class="px-4 py-3 rounded-lg border border-amber-500/30 bg-amber-500/5 text-amber-400 font-medium flex items-center gap-1.5"><i data-lucide="bot" class="ic ic-sm"></i> LLM + Function Calling</div>
+          <span class="text-cyan-400/50 text-xl hidden md:inline">→</span>
+          <div class="px-4 py-3 rounded-lg border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 font-medium flex items-center gap-1.5"><i data-lucide="message-circle" class="ic ic-sm"></i> 智能回复</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 知识库架构 -->
+<section class="section" id="knowledge">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="anim"><div class="section-divider"></div><h2 class="section-title">知识库架构</h2><p class="section-subtitle">9 大分类体系，覆盖游戏账号交易全链路</p></div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="home" class="ic ic-md"></i><span class="font-bold">平台基础信息</span></div>
+          <span class="kb-count">5</span>
+        </div>
+        <p class="text-sm text-slate-400">平台简介、核心业务、官方渠道、游戏品类</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 平台简介与定位</div>
+          <div class="kb-sub-item">▸ 核心业务（选购/代售/担保/回收/包赔）</div>
+          <div class="kb-sub-item">▸ 官方下载与联系方式</div>
+          <div class="kb-sub-item">▸ 重要官方声明</div>
+          <div class="kb-sub-item">▸ 支持的游戏品类</div>
+        </div>
+      </div>
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="repeat" class="ic ic-md"></i><span class="font-bold">交易流程</span></div>
+          <span class="kb-count">5</span>
+        </div>
+        <p class="text-sm text-slate-400">买家/卖家流程、挂牌代售、快速回收、中介担保</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 买家交易流程（7步）</div>
+          <div class="kb-sub-item">▸ 卖家交易流程（7步）</div>
+          <div class="kb-sub-item">▸ 中介担保流程</div>
+          <div class="kb-sub-item">▸ 挂牌代售操作</div>
+          <div class="kb-sub-item">▸ 快速回收操作</div>
+        </div>
+      </div>
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="clipboard-list" class="ic ic-md"></i><span class="font-bold">交易须知与规则</span></div>
+          <span class="kb-count">6</span>
+        </div>
+        <p class="text-sm text-slate-400">取消规则、交易前准备、注意事项、卖家失联处理</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 交易须知</div>
+          <div class="kb-sub-item">▸ 无责取消 / 违约取消</div>
+          <div class="kb-sub-item">▸ 交易前准备（买号/卖号/道具）</div>
+          <div class="kb-sub-item">▸ 交易中注意事项</div>
+          <div class="kb-sub-item">▸ 卖家失联处理</div>
+          <div class="kb-sub-item">▸ 神武交易须知</div>
+        </div>
+      </div>
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="help-circle" class="ic ic-md"></i><span class="font-bold">买家常见问题</span></div>
+          <span class="kb-count">11</span>
+        </div>
+        <p class="text-sm text-slate-400">选购攻略、包赔、防骗、二次实名、诈骗处理</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 如何选购心仪商品</div>
+          <div class="kb-sub-item">▸ 包赔选购攻略</div>
+          <div class="kb-sub-item">▸ 如何进行账号估值</div>
+          <div class="kb-sub-item">▸ 如何实名认证</div>
+          <div class="kb-sub-item">▸ 交易前应如何准备</div>
+          <div class="kb-sub-item">▸ 买号后出现异常问题怎么办</div>
+          <div class="kb-sub-item">▸ 账号被找回怎么办</div>
+          <div class="kb-sub-item">▸ 如何防止被骗（3类欺诈手段）</div>
+          <div class="kb-sub-item">▸ QQ二次实名问题</div>
+          <div class="kb-sub-item">▸ 如何验证客服/收款账号真假</div>
+          <div class="kb-sub-item">▸ 遭遇诈骗后应急处理</div>
+        </div>
+      </div>
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="shield-check" class="ic ic-md"></i><span class="font-bold">包赔服务说明</span></div>
+          <span class="kb-count">4</span>
+        </div>
+        <p class="text-sm text-slate-400">包赔类型、赔付比例、免责情形、特殊说明</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 6种包赔类型与赔付比例</div>
+          <div class="kb-sub-item">▸ 赔付规则（7日处理期）</div>
+          <div class="kb-sub-item">▸ 包赔免责情形</div>
+          <div class="kb-sub-item">▸ 包赔特殊说明</div>
+        </div>
+      </div>
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="search-check" class="ic ic-md"></i><span class="font-bold">验号须知</span></div>
+          <span class="kb-count">12</span>
+        </div>
+        <p class="text-sm text-slate-400">按游戏/平台分类的验号指南</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 通用验号须知</div>
+          <div class="kb-sub-item">▸ 微信账号验号须知</div>
+          <div class="kb-sub-item">▸ QQ账号验号须知</div>
+          <div class="kb-sub-item">▸ 网易账号验号须知</div>
+          <div class="kb-sub-item">▸ 米哈游验号须知</div>
+          <div class="kb-sub-item">▸ Steam验号流程</div>
+          <div class="kb-sub-item">▸ Apex英雄验号流程</div>
+          <div class="kb-sub-item">▸ 永劫无间验号注意事项</div>
+          <div class="kb-sub-item">▸ 逆水寒手游验号注意事项</div>
+          <div class="kb-sub-item">▸ 游卡验号须知</div>
+          <div class="kb-sub-item">▸ 瓦罗兰特验号须知</div>
+          <div class="kb-sub-item">▸ 空中网验号须知</div>
+        </div>
+      </div>
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="lock" class="ic ic-md"></i><span class="font-bold">换绑须知</span></div>
+          <span class="kb-count">9</span>
+        </div>
+        <p class="text-sm text-slate-400">按游戏/平台分类的换绑操作指南</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 通用换绑注意事项</div>
+          <div class="kb-sub-item">▸ 网易账号换绑（手机/邮箱）</div>
+          <div class="kb-sub-item">▸ Apex英雄（EA账号）换绑流程</div>
+          <div class="kb-sub-item">▸ Steam换绑流程</div>
+          <div class="kb-sub-item">▸ 拳头账号换绑注意事项</div>
+          <div class="kb-sub-item">▸ 瓦罗兰特换绑须知</div>
+          <div class="kb-sub-item">▸ EPIC换绑</div>
+          <div class="kb-sub-item">▸ 西山居账号换绑</div>
+          <div class="kb-sub-item">▸ 空中网换绑流程</div>
+        </div>
+      </div>
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="wrench" class="ic ic-md"></i><span class="font-bold">售后处理规则</span></div>
+          <span class="kb-count">4</span>
+        </div>
+        <p class="text-sm text-slate-400">售后申请、场景分类、异常处理、不可售后情形</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 如何申请售后</div>
+          <div class="kb-sub-item">▸ 售后场景分类表</div>
+          <div class="kb-sub-item">▸ 腾讯/网易系异常处理指引</div>
+          <div class="kb-sub-item">▸ 不可售后情形</div>
+        </div>
+      </div>
+      <div class="kb-category anim" onclick="toggleKB(this)">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2"><i data-lucide="scroll-text" class="ic ic-md"></i><span class="font-bold">平台规则与安全</span></div>
+          <span class="kb-count">2</span>
+        </div>
+        <p class="text-sm text-slate-400">违规行为分类、处罚标准、申诉机制</p>
+        <div class="kb-sub-items">
+          <div class="kb-sub-item">▸ 违规发言/交易行为与处罚</div>
+          <div class="kb-sub-item">▸ 违规核查与申诉处理</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 数据看板 -->
+<section class="section" id="dashboard" style="background:var(--bg1)">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="anim"><div class="section-divider"></div><h2 class="section-title">数据运营看板</h2><p class="section-subtitle">知识库运营效果追踪与持续优化</p></div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+      <div class="metric-card anim">
+        <div class="text-sm text-slate-400 mb-2">自动解决率</div>
+        <div class="metric-value" style="color:var(--c3)">87.3%</div>
+        <div class="text-green-400 mt-1 text-sm">↑ 5.2% 较上月</div>
+      </div>
+      <div class="metric-card anim">
+        <div class="text-sm text-slate-400 mb-2">平均响应时间</div>
+        <div class="metric-value" style="color:var(--c1)">2.3s</div>
+        <div class="text-green-400 mt-1 text-sm">↓ 0.8s 较上月</div>
+      </div>
+      <div class="metric-card anim">
+        <div class="text-sm text-slate-400 mb-2">日均对话量</div>
+        <div class="metric-value" style="color:var(--c2)">1,286</div>
+        <div class="text-green-400 mt-1 text-sm">↑ 12% 较上月</div>
+      </div>
+      <div class="metric-card anim">
+        <div class="text-sm text-slate-400 mb-2">用户满意度</div>
+        <div class="metric-value" style="color:var(--c4)">92.1%</div>
+        <div class="text-green-400 mt-1 text-sm">↑ 3.1% 较上月</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="chart-container anim">
+        <h3 class="font-bold mb-4">月度对话量趋势</h3>
+        <canvas id="chartVolume" height="200"></canvas>
+      </div>
+      <div class="chart-container anim">
+        <h3 class="font-bold mb-4">问题分类分布</h3>
+        <canvas id="chartCategory" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 场景案例 -->
+<section class="section" id="scenarios">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="anim"><div class="section-divider"></div><h2 class="section-title">典型场景案例</h2><p class="section-subtitle">覆盖情绪识别、多轮引导、防诈骗、转人工四大核心场景</p></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="scenario-card anim">
+        <div class="scenario-header">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="scenario-tag" style="background:var(--c6-10);border:1px solid rgba(239,68,68,0.2);color:var(--c6)"><i data-lucide="target" class="ic ic-xs"></i> 情绪识别</span>
+          </div>
+          <h3 class="font-bold">急躁用户安抚</h3>
+        </div>
+        <div class="scenario-chat">
+          <div class="chat-bubble user">我的号都被找回了！！你们怎么搞的！！</div>
+          <div class="chat-bubble ai">非常抱歉给您带来不好的体验。我完全理解您的心情，请您放心，我们会全力帮您处理。<br><br>请问您购买时是否选择了包赔服务？我可以立即帮您启动赔付流程。</div>
+        </div>
+        <div class="px-4 py-3 border-t border-white/5">
+          <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="lightbulb" class="ic ic-xs"></i> AI 识别到用户情绪激动，优先安抚 + 引导解决方案</span>
+        </div>
+      </div>
+
+      <div class="scenario-card anim">
+        <div class="scenario-header">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="scenario-tag" style="background:var(--c2-15);border:1px solid var(--c2-20);color:var(--c2)"><i data-lucide="refresh-cw" class="ic ic-xs"></i> 多轮引导</span>
+          </div>
+          <h3 class="font-bold">换绑流程引导</h3>
+        </div>
+        <div class="scenario-chat">
+          <div class="chat-bubble user">网易账号怎么换绑手机号？</div>
+          <div class="chat-bubble ai">好的，网易账号换绑手机号流程如下：<br><br>1. 用卖家手机号登录网易账号，进入「手机号管理」<br>2. 点击【更换】→ 选择【手机号还能用】<br>3. 卖家通过短信验证码验证身份<br>4. 输入您的新手机号，获取验证码<br>5. 截图24小时审核页面<br><br>24小时后需确认换绑是否成功，需要我告诉您确认方法吗？</div>
+        </div>
+        <div class="px-4 py-3 border-t border-white/5">
+          <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="lightbulb" class="ic ic-xs"></i> AI 分步骤引导，主动追问是否需要后续操作说明</span>
+        </div>
+      </div>
+
+      <div class="scenario-card anim">
+        <div class="scenario-header">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="scenario-tag" style="background:var(--c5-15);border:1px solid rgba(245,158,11,0.2);color:var(--c5)"><i data-lucide="shield-alert" class="ic ic-xs"></i> 防诈骗</span>
+          </div>
+          <h3 class="font-bold">诈骗风险识别</h3>
+        </div>
+        <div class="scenario-chat">
+          <div class="chat-bubble user">有个客服让我加他QQ退款，说是官方的</div>
+          <div class="chat-bubble ai">**这是诈骗！**请千万不要添加！<br><br>盼之代售官方客服**仅在APP/官网内**提供服务，**绝不会**通过QQ、微信、电话联系您。<br><br>官方交易仅有**交易群**和**自动发货**两种模式，其他方式均为诈骗。<br><br>如已泄露信息，请立即：冻结银行卡 → 联系平台客服 → 报警</div>
+        </div>
+        <div class="px-4 py-3 border-t border-white/5">
+          <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="lightbulb" class="ic ic-xs"></i> AI 检测到诈骗风险，立即高警级提醒并给出应急步骤</span>
+        </div>
+      </div>
+
+      <div class="scenario-card anim">
+        <div class="scenario-header">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="scenario-tag" style="background:var(--c4-15);border:1px solid var(--c4-20);color:var(--c4)"><i data-lucide="headphones" class="ic ic-xs"></i> 转人工</span>
+          </div>
+          <h3 class="font-bold">超出范围转接</h3>
+        </div>
+        <div class="scenario-chat">
+          <div class="chat-bubble user">我要投诉你们的一个卖家，交易中态度很差还毁号</div>
+          <div class="chat-bubble ai">非常抱歉给您造成困扰。<br><br>涉及交易纠纷和投诉处理，需要人工客服介入帮您详细处理。<br><br>**人工客服时间**：9:30 - 0:30<br>**投诉热线**：020-22959716<br>也可在APP内「我的」→「我买到的」→「申请售后」提交<br><br>建议您保留交易群聊天记录和截图作为凭证，客服会帮您跟进处理。</div>
+        </div>
+        <div class="px-4 py-3 border-t border-white/5">
+          <span class="text-xs text-slate-500 flex items-center gap-1"><i data-lucide="lightbulb" class="ic ic-xs"></i> AI 判断涉及纠纷需人工介入，提供多渠道联系方式</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 订单模拟 -->
+<section class="section" id="order-sim">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="anim"><div class="section-divider"></div><h2 class="section-title">订单模拟器</h2><p class="section-subtitle">一键生成模拟订单数据，写入数据库后可在聊天框中查询体验</p></div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="anim" style="background:var(--bg2);border:1px solid var(--c1-10);border-radius:var(--r-lg);padding:1.5rem">
+        <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i data-lucide="file-edit" class="ic ic-md"></i> 填写订单信息</h3>
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="form-label">游戏名称</label>
+              <select id="simGame" class="form-select" onchange="onSimGameChange()">
+                <option value="王者荣耀">王者荣耀</option>
+                <option value="和平精英">和平精英</option>
+                <option value="原神">原神</option>
+                <option value="永劫无间">永劫无间</option>
+                <option value="逆水寒">逆水寒</option>
+                <option value="英雄联盟">英雄联盟</option>
+                <option value="第五人格">第五人格</option>
+                <option value="CF穿越火线">CF穿越火线</option>
+                <option value="DNF地下城">DNF地下城</option>
+                <option value="瓦罗兰特">瓦罗兰特</option>
+                <option value="Apex英雄">Apex英雄</option>
+                <option value="梦幻西游">梦幻西游</option>
+                <option value="明日之后">明日之后</option>
+                <option value="Steam账号">Steam账号</option>
+                <option value="神武4">神武4</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label">账号平台</label>
+              <select id="simPlatform" class="form-select">
+                <option value="QQ">QQ</option>
+                <option value="微信">微信</option>
+                <option value="米哈游">米哈游</option>
+                <option value="网易">网易</option>
+                <option value="Steam">Steam</option>
+                <option value="EA">EA</option>
+                <option value="拳头">拳头</option>
+                <option value="B站">B站</option>
+                <option value="多益">多益</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="form-label">商品描述</label>
+            <input id="simProduct" type="text" class="form-input" placeholder="点击「随机填充」自动生成">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="form-label">交易金额 (¥)</label>
+              <input id="simAmount" type="number" step="0.01" class="form-input" placeholder="自动生成">
+            </div>
+            <div>
+              <label class="form-label">包赔类型</label>
+              <select id="simPackage" class="form-select">
+                <option value="无包赔">无包赔</option>
+                <option value="免费包赔">免费包赔</option>
+                <option value="基础包赔" selected>基础包赔</option>
+                <option value="双倍包赔">双倍包赔</option>
+                <option value="三倍包赔">三倍包赔</option>
+                <option value="人脸包赔">人脸包赔</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="form-label">买家手机号</label>
+              <input id="simPhone" type="text" class="form-input" placeholder="自动生成">
+            </div>
+            <div>
+              <label class="form-label">卖家名称</label>
+              <input id="simSeller" type="text" class="form-input" placeholder="自动生成">
+            </div>
+          </div>
+          <div>
+            <label class="form-label">订单状态</label>
+            <div class="flex flex-wrap gap-2" id="simStatusGroup">
+              <label class="sim-status-opt"><input type="radio" name="simStatus" value="待付款" class="hidden"><span class="px-3 py-1.5 rounded-lg text-sm cursor-pointer border transition-all flex items-center gap-1" style="border-color:rgba(245,158,11,0.3);color:#f59e0b;background:rgba(245,158,11,0.05)"><i data-lucide="clock" class="ic ic-xs"></i> 待付款</span></label>
+              <label class="sim-status-opt"><input type="radio" name="simStatus" value="交易中" class="hidden"><span class="px-3 py-1.5 rounded-lg text-sm cursor-pointer border transition-all flex items-center gap-1" style="border-color:rgba(59,130,246,0.3);color:#3b82f6;background:rgba(59,130,246,0.05)"><i data-lucide="arrow-left-right" class="ic ic-xs"></i> 交易中</span></label>
+              <label class="sim-status-opt"><input type="radio" name="simStatus" value="验号中" class="hidden"><span class="px-3 py-1.5 rounded-lg text-sm cursor-pointer border transition-all flex items-center gap-1" style="border-color:rgba(139,92,246,0.3);color:#8b5cf6;background:rgba(139,92,246,0.05)"><i data-lucide="search" class="ic ic-xs"></i> 验号中</span></label>
+              <label class="sim-status-opt"><input type="radio" name="simStatus" value="换绑中" class="hidden"><span class="px-3 py-1.5 rounded-lg text-sm cursor-pointer border transition-all flex items-center gap-1" style="border-color:rgba(6,182,212,0.3);color:#06b6d4;background:rgba(6,182,212,0.05)"><i data-lucide="lock" class="ic ic-xs"></i> 换绑中</span></label>
+              <label class="sim-status-opt"><input type="radio" name="simStatus" value="已完成" checked class="hidden"><span class="px-3 py-1.5 rounded-lg text-sm cursor-pointer border transition-all flex items-center gap-1" style="border-color:rgba(16,185,129,0.3);color:#10b981;background:rgba(16,185,129,0.1)"><i data-lucide="check-circle" class="ic ic-xs"></i> 已完成</span></label>
+              <label class="sim-status-opt"><input type="radio" name="simStatus" value="售后中" class="hidden"><span class="px-3 py-1.5 rounded-lg text-sm cursor-pointer border transition-all flex items-center gap-1" style="border-color:rgba(239,68,68,0.3);color:#ef4444;background:rgba(239,68,68,0.05)"><i data-lucide="wrench" class="ic ic-xs"></i> 售后中</span></label>
+            </div>
+          </div>
+          <div id="simRemarkWrap" class="hidden">
+            <label class="form-label">售后备注</label>
+            <input id="simRemark" type="text" class="form-input" placeholder="如：账号被找回，已启动包赔流程">
+          </div>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <button onclick="randomFillOrder()" class="flex-1 px-4 py-2.5 rounded-lg border border-cyan-500/30 text-cyan-400 font-medium hover:bg-cyan-500/10 transition-all text-sm flex items-center justify-center gap-1.5"><i data-lucide="shuffle" class="ic ic-sm"></i> 随机填充</button>
+          <button onclick="submitOrder()" id="submitOrderBtn" class="flex-1 px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:opacity-90 transition-all text-sm flex items-center justify-center gap-1.5"><i data-lucide="database" class="ic ic-sm"></i> 写入数据库</button>
+        </div>
+      </div>
+
+      <div class="anim" style="background:var(--bg2);border:1px solid var(--c1-10);border-radius:var(--r-lg);padding:1.5rem;display:flex;flex-direction:column">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-lg flex items-center gap-2"><i data-lucide="eye" class="ic ic-md"></i> 生成预览</h3>
+          <button onclick="copyOrderJSON()" id="copyBtn" class="px-3 py-1.5 rounded-lg text-xs border border-white/10 text-slate-400 hover:text-white hover:border-white/30 transition-all flex items-center gap-1"><i data-lucide="copy" class="ic ic-xs"></i> 复制 JSON</button>
+        </div>
+        <div id="orderPreview" class="flex-1 rounded-lg p-4 text-sm font-mono overflow-auto" style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.05);min-height:200px;color:var(--t2);line-height:1.8;max-height:420px">
+          <span class="text-slate-500">点击「随机填充」生成数据预览...</span>
+        </div>
+
+        <div class="mt-4 p-3 rounded-lg" style="background:var(--c1-05);border:1px solid var(--c1-15)">
+          <div class="text-sm text-cyan-400 font-medium mb-2 flex items-center gap-1.5"><i data-lucide="lightbulb" class="ic ic-sm"></i> 测试方式</div>
+          <ol class="text-xs text-slate-400 space-y-1 list-decimal pl-4">
+            <li>点击「随机填充」生成一条订单数据</li>
+            <li>点击「写入数据库」将订单保存到 SQLite</li>
+            <li>打开右下角聊天框，输入<strong class="text-cyan-400">订单号</strong>或<strong class="text-cyan-400">手机号</strong>查询</li>
+            <li>或点击「复制 JSON」手动粘贴到其他工具</li>
+          </ol>
+        </div>
+
+        <div class="mt-3 flex items-center gap-3 text-sm">
+          <span class="text-slate-400">已通过模拟器写入：</span>
+          <span id="simCount" class="font-bold text-cyan-400">0</span>
+          <span class="text-slate-400">条</span>
+          <button onclick="loadSimCount()" class="text-xs text-slate-500 hover:text-cyan-400 transition-all flex items-center gap-1"><i data-lucide="refresh-cw" class="ic ic-xs"></i> 刷新</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 人工接管 -->
+<section class="section" id="human-agent" style="background:var(--bg1)">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="anim"><div class="section-divider"></div><h2 class="section-title">人工客服接管</h2><p class="section-subtitle">AI 无法解决时，一键转人工，无缝衔接对话上下文</p></div>
+
+    <div class="anim grid grid-cols-1 md:grid-cols-5 gap-4 items-center max-w-5xl mx-auto mb-12">
+      <div class="text-center p-4" style="background:var(--bg2);border:1px solid var(--c1-15);border-radius:var(--r-lg)">
+        <div class="text-3xl mb-2"><i data-lucide="bot" class="ic ic-2xl" style="color:var(--c1)"></i></div>
+        <div class="font-bold text-sm">AI 客服服务</div>
+        <div class="text-xs text-slate-400 mt-1">自动解答常见问题</div>
+      </div>
+      <div class="text-center text-2xl text-cyan-500">→</div>
+      <div class="text-center p-4" style="background:var(--c5-05);border:1px solid rgba(245,158,11,0.2);border-radius:var(--r-lg)">
+        <div class="text-3xl mb-2"><i data-lucide="bell-ring" class="ic ic-2xl" style="color:var(--c5)"></i></div>
+        <div class="font-bold text-sm" style="color:#f59e0b">转人工请求</div>
+        <div class="text-xs text-slate-400 mt-1">AI推送上下文摘要</div>
+      </div>
+      <div class="text-center text-2xl text-cyan-500">→</div>
+      <div class="text-center p-4" style="background:rgba(16,185,129,0.05);border:1px solid var(--c3-20);border-radius:var(--r-lg)">
+        <div class="text-3xl mb-2"><i data-lucide="headset" class="ic ic-2xl" style="color:var(--c3)"></i></div>
+        <div class="font-bold text-sm" style="color:#10b981">人工客服接管</div>
+        <div class="text-xs text-slate-400 mt-1">带上下文继续服务</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="anim" style="background:var(--bg2);border:1px solid var(--c1-10);border-radius:var(--r-lg);padding:1.5rem">
+        <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i data-lucide="target" class="ic ic-md"></i> 转人工触发场景</h3>
+        <div class="space-y-3">
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:var(--c6-10);border:1px solid var(--c6-15)">
+            <i data-lucide="frown" class="ic ic-md" style="color:var(--c6)"></i>
+            <div><div class="font-medium text-sm">用户情绪激动/投诉</div><div class="text-xs text-slate-400 mt-1">AI检测到负面情绪，建议转人工安抚</div></div>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:var(--c5-05);border:1px solid rgba(245,158,11,0.15)">
+            <i data-lucide="wallet" class="ic ic-md" style="color:var(--c5)"></i>
+            <div><div class="font-medium text-sm">涉及退款/大额交易争议</div><div class="text-xs text-slate-400 mt-1">资金敏感问题优先人工处理</div></div>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:var(--c4-15);border:1px solid var(--c4-20)">
+            <i data-lucide="help-circle" class="ic ic-md" style="color:var(--c4)"></i>
+            <div><div class="font-medium text-sm">知识库无法覆盖的问题</div><div class="text-xs text-slate-400 mt-1">AI回答不上来时，引导转人工</div></div>
+          </div>
+          <div class="flex items-start gap-3 p-3 rounded-lg" style="background:var(--c2-15);border:1px solid var(--c2-20)">
+            <i data-lucide="refresh-cw" class="ic ic-md" style="color:var(--c2)"></i>
+            <div><div class="font-medium text-sm">用户主动要求</div><div class="text-xs text-slate-400 mt-1">用户说"我要找人工""转人工"等关键词</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="anim" style="background:var(--bg2);border:1px solid var(--c1-10);border-radius:var(--r-lg);padding:1.5rem">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-lg flex items-center gap-2"><i data-lucide="monitor" class="ic ic-md"></i> 人工客服工作台</h3>
+          <a href="/agent" target="_blank" class="px-3 py-1.5 rounded-lg text-xs border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all flex items-center gap-1"><i data-lucide="external-link" class="ic ic-xs"></i> 打开工作台</a>
+        </div>
+        <div class="rounded-lg overflow-hidden border border-white/5" style="background:var(--bg0)">
+          <div style="background:var(--bg2);padding:0.5rem 0.75rem;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:0.5rem">
+            <div style="width:20px;height:20px;border-radius:0.35rem;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.5rem;font-weight:700">盼</div>
+            <span style="font-size:0.75rem;font-weight:600">人工客服工作台</span>
+          </div>
+          <div style="padding:0.75rem;font-size:0.75rem">
+            <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem">
+              <span style="color:var(--c5)">排队中: <b>1</b></span>
+              <span style="color:var(--c3)">服务中: <b>0</b></span>
+            </div>
+            <div style="background:var(--c1-05);border:1px solid var(--c1-15);border-radius:0.5rem;padding:0.5rem;margin-bottom:0.5rem">
+              <div style="font-weight:600">客户 <span style="color:#f59e0b;font-size:0.6rem;background:rgba(245,158,11,0.1);padding:0.1rem 0.4rem;border-radius:99px">排队中</span></div>
+              <div style="color:var(--t2);font-size:0.7rem;margin-top:0.2rem">账号被找回申请退款</div>
+            </div>
+            <div style="background:var(--c5-05);border:1px solid rgba(245,158,11,0.1);border-radius:0.5rem;padding:0.5rem;font-size:0.7rem;color:var(--t2)">
+              <div style="color:var(--c5);font-weight:600;margin-bottom:0.2rem"><i data-lucide="bot" class="ic ic-xs"></i> AI上下文摘要</div>
+              用户反映账号被找回，已购买基础包赔，订单号PZ2026050008，金额¥2680。AI已解答包赔流程但用户不满意...
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 p-3 rounded-lg" style="background:rgba(16,185,129,0.05);border:1px solid var(--c3-20)">
+          <div class="text-sm font-medium mb-1 flex items-center gap-1.5" style="color:#10b981"><i data-lucide="sparkles" class="ic ic-sm"></i> 上下文无缝衔接</div>
+          <div class="text-xs text-slate-400">AI 自动生成对话摘要，人工客服接入后无需重复询问，直接从上下文继续服务</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="anim mt-8 text-center">
+      <p class="text-slate-400 text-sm mb-3 flex items-center justify-center gap-1.5"><i data-lucide="lightbulb" class="ic ic-sm" style="color:var(--c5)"></i> <strong>体验方式</strong>：在聊天框中输入「转人工」，AI 会先了解您的问题并尝试用知识库解决；确实无法解决时才会转接人工客服</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <button onclick="openChatAndTransfer()" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:opacity-90 transition-all flex items-center gap-1.5"><i data-lucide="message-circle" class="ic ic-sm"></i> 体验转人工</button>
+        <a href="/agent" target="_blank" class="px-6 py-2.5 rounded-xl border border-cyan-500/30 text-cyan-400 font-medium hover:bg-cyan-500/10 transition-all flex items-center gap-1.5"><i data-lucide="monitor" class="ic ic-sm"></i> 打开客服工作台</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-12 border-t border-white/5" style="background:var(--bg1)">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <div class="flex items-center justify-center gap-2 mb-4">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">盼</div>
+      <span class="font-bold text-lg">盼之代售 AI 智能客服</span>
+    </div>
+    <p class="text-slate-500 text-sm mb-2">基于 RAG + LLM 的知识库运营方案展示 · 仅供面试作品使用</p>
+    <p class="text-slate-600 text-xs">知识库数据来源：盼之代售官网 (www.pzds.com) 帮助中心</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-6">
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">Flask</span>
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">SQLite</span>
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">BM25 + Embedding</span>
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">Function Calling</span>
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">LLM</span>
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">Tailwind CSS</span>
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">Chart.js</span>
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">marked.js</span>
+      <span class="px-3 py-1 rounded-md text-xs" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--t2)">Lucide Icons</span>
+    </div>
+  </div>
+</footer>
+
+<!-- 聊天悬浮按钮 -->
+<button class="chat-widget-btn has-new" id="chatBtn" onclick="toggleChat()"><i data-lucide="message-circle" class="ic ic-lg"></i></button>
+
+<!-- 聊天面板 -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-panel-header">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold">盼</div>
+        <div>
+          <div class="font-bold text-sm" id="chatTitle">小盼 · AI 客服</div>
+          <div class="text-xs text-green-400 flex items-center gap-1" id="chatOnline"><span class="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span>在线</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="toggleChat()" class="text-slate-400 hover:text-white leading-none"><i data-lucide="x" class="ic ic-md"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-bubble ai">
+      您好！我是小盼，盼之代售AI智能客服<br>关于游戏账号交易的问题都可以问我，比如：<br>• 账号被找回怎么办<br>• 换绑流程怎么操作<br>• 包赔服务有哪些类型<br>• 如何防诈骗<br><br>请问有什么可以帮您？
+    </div>
+  </div>
+
+  <div class="quick-replies-panel" id="quickReplies">
+    <button class="quick-reply-btn" onclick="sendQuick(this)">账号被找回</button>
+    <button class="quick-reply-btn" onclick="sendQuick(this)">交易流程怎么走</button>
+    <button class="quick-reply-btn" onclick="sendQuick(this)">如何防骗</button>
+    <button class="quick-reply-btn" onclick="sendQuick(this)">包赔类型</button>
+    <button class="quick-reply-btn" onclick="sendQuick(this)">网易换绑</button>
+    <button class="quick-reply-btn" onclick="sendQuick(this)">卖家失联</button>
+    <button class="quick-reply-btn" onclick="sendQuick(this)">查我的订单</button>
+  </div>
+
+  <div class="chat-input-area">
+    <textarea class="chat-input" id="chatInput" placeholder="输入您的问题..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button class="chat-send-btn" id="sendBtn" onclick="sendMessage()"><i data-lucide="send" class="ic ic-md"></i></button>
+  </div>
+</div>
+
+<script src="/static/js/charts.js"></script>
+<script src="/static/js/simulator.js"></script>
+<script src="/static/js/chat.js"></script>
+<script>
+// ============ 滚动动画 ============
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+// 导航栏滚动效果
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  const sections = ['hero','workflow','knowledge','dashboard','scenarios','order-sim','human-agent'];
+  const links = document.querySelectorAll('.nav-link, .nav-link-mobile');
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 200) current = id;
+  });
+  links.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+
+// ============ 知识库展开 ============
+function toggleKB(el) {
+  el.classList.toggle('expanded');
+}
+
+// ============ 初始化 ============
+initCharts();
+initSimulator();
+initChat();
+lucide.createIcons();
+</script>
+
+</body>
+</html>

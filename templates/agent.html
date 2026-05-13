@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人工客服工作台 - 盼之代售</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/base.css">
+<link rel="stylesheet" href="/static/css/components.css">
+<link rel="stylesheet" href="/static/css/pages.css">
+</head>
+<body style="height:100vh;overflow:hidden;display:flex;flex-direction:column">
+
+<div class="top-bar">
+  <h1>
+    <div style="width:28px;height:28px;border-radius:0.5rem;background:linear-gradient(135deg,var(--c1),var(--c2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75rem;font-weight:700">盼</div>
+    人工客服工作台
+  </h1>
+  <div style="display:flex;align-items:center;gap:0.75rem">
+    <span style="font-size:0.75rem;color:var(--t3)">在线客服：<strong style="color:var(--c3)">小张</strong></span>
+    <div style="width:8px;height:8px;border-radius:50%;background:var(--c3)"></div>
+    <a href="/" style="font-size:0.75rem;color:var(--c1);text-decoration:none;border:1px solid var(--c1-30);padding:0.25rem 0.75rem;border-radius:0.5rem"><i data-lucide="arrow-left" class="ic ic-sm"></i> 返回首页</a>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item"><div class="num" id="statPending" style="color:var(--c5)">0</div><div class="label">排队中</div></div>
+  <div class="stat-item"><div class="num" id="statActive" style="color:var(--c3)">0</div><div class="label">服务中</div></div>
+  <div class="stat-item"><div class="num" id="statTotal" style="color:var(--c1)">0</div><div class="label">总会话</div></div>
+</div>
+
+<div class="main-layout">
+  <!-- 左侧：会话列表 -->
+  <div class="session-list" id="sessionList">
+    <div class="empty-state" style="padding:2rem 0">
+      <div class="ic ic-lg"><i data-lucide="inbox"></i></div>
+      <div style="font-size:0.8rem">暂无会话</div>
+      <div style="font-size:0.7rem">等待客户转人工请求...</div>
+    </div>
+  </div>
+
+  <!-- 右侧：聊天区 -->
+  <div class="chat-area" id="chatArea">
+    <div class="empty-state" id="emptyChat">
+      <div class="ic ic-lg"><i data-lucide="message-square"></i></div>
+      <div style="font-size:0.9rem;font-weight:600">选择左侧会话开始服务</div>
+      <div style="font-size:0.75rem">当客户在AI聊天中发送「转人工」请求后，会话将出现在这里</div>
+    </div>
+
+    <div id="activeChat" style="display:none;flex-direction:column;height:100%;overflow:hidden">
+      <div class="chat-header">
+        <div>
+          <span id="chatTitle" style="font-weight:600">客户</span>
+          <span id="chatStatus" class="badge badge-pending" style="margin-left:0.5rem">排队中</span>
+        </div>
+        <div style="display:flex;gap:0.5rem">
+          <button id="acceptBtn" class="btn-accept" onclick="acceptSession()" style="padding:0.35rem 0.75rem;border-radius:0.5rem;font-size:0.75rem;cursor:pointer"><i data-lucide="check" class="ic ic-sm"></i> 接入</button>
+          <button id="endBtn" class="btn-end" onclick="endSession()" style="padding:0.35rem 0.75rem;border-radius:0.5rem;font-size:0.75rem;cursor:pointer;display:none"><i data-lucide="log-out" class="ic ic-sm"></i> 结束</button>
+        </div>
+      </div>
+
+      <div id="contextPanel" style="display:none" class="context-panel">
+        <div class="label"><i data-lucide="bot" class="ic ic-sm"></i> AI 客服上下文摘要</div>
+        <div id="contextSummary" style="color:var(--t2)"></div>
+      </div>
+
+      <div class="chat-messages-area" id="chatMessages"></div>
+
+      <div class="quick-replies" id="quickReplies" style="display:none">
+        <span class="quick-reply" onclick="quickReply(this)">您好，我是人工客服小张，请问有什么可以帮您？</span>
+        <span class="quick-reply" onclick="quickReply(this)">请您提供一下订单号</span>
+        <span class="quick-reply" onclick="quickReply(this)">这个问题我需要核实一下，请您稍等</span>
+        <span class="quick-reply" onclick="quickReply(this)">已经为您处理好了，还有其他问题吗？</span>
+        <span class="quick-reply" onclick="quickReply(this)">抱歉给您带来不便，我们会尽快处理</span>
+      </div>
+
+      <div class="chat-input-area-agent" id="inputArea" style="display:none">
+        <input type="text" id="agentInput" placeholder="输入回复内容..." onkeydown="if(event.key==='Enter')sendAgentReply()">
+        <button class="btn-send" id="agentSendBtn" onclick="sendAgentReply()">发送</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/agent.js"></script>
+</body>
+</html>
