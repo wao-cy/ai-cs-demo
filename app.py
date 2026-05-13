@@ -286,13 +286,17 @@ def agent_reply(session_id):
     return jsonify(result)
 
 
-# ============ 启动 ============
+# ============ 启动初始化 ============
+# 模块加载时执行（gunicorn / python app.py 均会触发）
+kb_service.load_knowledge_base()
+order_service.init_db()
+
+
+# ============ 本地开发启动 ============
 
 if __name__ == '__main__':
     import sys
     sys.stdout.reconfigure(encoding='utf-8')
-    kb_service.load_knowledge_base()
-    order_service.init_db()
     print(f"\n{'=' * 40}")
     print(f"  盼之代售 AI 客服 Demo")
     print(f"  http://{config.HOST}:{config.PORT}")
