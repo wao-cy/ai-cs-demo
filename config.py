@@ -38,7 +38,7 @@ HISTORY_TURNS = int(os.environ.get("HISTORY_TURNS", "5"))
 # === Embedding 配置 ===
 # 用于知识库向量检索的 Embedding 模型
 EMBEDDING_API_BASE = os.environ.get("EMBEDDING_API_BASE", API_BASE)
-EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "text-embedding-v3")
+EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "text-embedding-v4")
 
 # === 混合检索权重 ===
 # BM25 关键词检索权重（向量检索权重 = 1 - RETRIEVAL_ALPHA）
